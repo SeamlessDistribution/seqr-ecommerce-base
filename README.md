@@ -1,5 +1,10 @@
 # Docker Apache PHP
 
+## INFO
+Apache - 2.4.7
+PHP - 5.5.9
+MySQL - 5.5.46
+
 ## To Build
 
 ``` bash
