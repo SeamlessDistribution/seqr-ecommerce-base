@@ -1,8 +1,8 @@
 # Docker Apache PHP
 
-Apache - 2.4.7</br>
-PHP - 5.5.9<br/>
-MySQL - 5.5.46
+Apache - 2.4.17</br>
+PHP - 5.6.14<br/>
+MySQL - 5.6.27
 
 ## To Build
 
