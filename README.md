@@ -3,7 +3,7 @@
 ## To Build
 
 ``` bash
-$ docker build -t eugeneware/docker-apache-php .
+$ docker build -t docker-apache-php .
 ```
 
 ### To Run
@@ -12,8 +12,8 @@ Use [docker volumes](http://docs.docker.io/use/working_with_volumes/) to expose
 your web content to the apache web server.
 
 ``` bash
-# run docker apache php
-$ CONTAINER=$(docker run -d -p 80 -p 3306 -v /your/path/to/serve:/var/www/html eugeneware/docker-apache-php)
+# run docker apache php as deamon with expose your web content to the apache web server
+$ CONTAINER=$(docker run -p 80 -p 3306 -v /var/www/html:/var/www/html -d docker-apache-php)
 
 # get the http port
 $ docker port $CONTAINER 80
