@@ -1,9 +1,12 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER Eugene Ware <eugene@noblesamurai.com>
 
 # Keep upstart from complaining
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -sf /bin/true /sbin/initctl
+
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list && apt-get update && apt-get -y dist-upgrade
+RUN echo "deb http://ppa.launchpad.net/ondrej/php5-5.6/ubuntu trusty main" >> /etc/apt/sources.list && apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C && apt-get update
 
 # Update
 RUN apt-get update
@@ -13,7 +16,7 @@ RUN apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server mysql-client apache2 libapache2-mod-php5 php5-mysql php-apc python-setuptools curl git unzip vim-tiny
 
 # Wordpress Requirements
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imap php5-mcrypt php5-memcache php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
 # mysql config
 ADD my.cnf /etc/mysql/conf.d/my.cnf
