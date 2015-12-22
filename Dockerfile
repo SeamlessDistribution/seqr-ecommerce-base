@@ -39,7 +39,7 @@ RUN echo 'zend_extension="/usr/lib/php5/20121212/xdebug.so"' >> /etc/php5/apache
 RUN echo "xdebug.remote_enable=on"  >> /etc/php5/apache2/php.ini
 RUN echo "xdebug.remote_handler=dbgp" >> /etc/php5/apache2/php.ini
 RUN echo "xdebug.remote_connect_back=On" >> /etc/php5/apache2/php.ini
-RUN echo "xdebug.idekey=IDE" > /etc/php5/apache2/php.ini
+RUN echo "xdebug.idekey=IDE" >> /etc/php5/apache2/php.ini
 
 # fix for php5-mcrypt
 RUN /usr/sbin/php5enmod mcrypt
