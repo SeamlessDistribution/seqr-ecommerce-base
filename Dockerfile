@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Eugene Ware <eugene@noblesamurai.com>
+MAINTAINER Grzegorz Wodo <grzegorz.wodo@gmail.com>
 
 # Keep upstart from complaining
 RUN dpkg-divert --local --rename --add /sbin/initctl
@@ -34,6 +34,15 @@ VOLUME /var/www/html
 RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php5/apache2/php.ini
 RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php5/apache2/php.ini
 RUN sed -i -e "s/short_open_tag\s*=\s*Off/short_open_tag = On/g" /etc/php5/apache2/php.ini
+#XEBUG
+#RUN apt-get -y install php5-dev php-pear
+#RUN pecl install xdebug
+RUN apt-get -y install php5-xdebug
+RUN echo 'zend_extension="/usr/lib/php5/20131226/xdebug.so"' >> /etc/php5/apache2/php.ini
+RUN echo "xdebug.remote_enable=on"  >> /etc/php5/apache2/php.ini
+RUN echo "xdebug.remote_handler=dbgp" >> /etc/php5/apache2/php.ini
+RUN echo "xdebug.remote_connect_back=On" >> /etc/php5/apache2/php.ini
+RUN echo "xdebug.idekey=ECLIPSE_DBGP" >> /etc/php5/apache2/php.ini
 
 # fix for php5-mcrypt
 RUN /usr/sbin/php5enmod mcrypt
@@ -50,5 +59,6 @@ RUN chmod 755 /start.sh
 
 EXPOSE 3306
 EXPOSE 80
+EXPOSE 9000
 
 CMD ["/bin/bash", "/start.sh"]
